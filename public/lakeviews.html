@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakeview Health Services Limited - Reliable Care, Anywhere You Are.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Define Brand Colors (derived from logo analysis) */
+        :root {
+            /* These are derived from the deep blue and teal tones often found in health logos. */
+            --primary-dark-blue: #0A1C38; /* A deep, rich blue */
+            --secondary-teal: #246E71;    /* A sophisticated teal/dark cyan */
+            --accent-cyan: #00BCD4;       /* A brighter, vibrant cyan for accents and buttons */
+            --text-dark: #333;
+            --text-light: #555;
+            --background-light: #f9f9f9;
+            --background-white: #ffffff;
+            --border-light: #eee;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --transition-speed: 0.3s ease;
+            --font-family-poppins: 'Poppins', sans-serif;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: var(--font-family-poppins);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            scroll-behavior: smooth; /* For smooth scrolling to sections */
+        }
+
+        /* Container for content width */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--background-white);
+            padding: 15px 0;
+            box-shadow: var(--shadow-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            max-height: 50px; /* Adjust based on your logo's aspect ratio */
+            margin-right: 15px;
+            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.1)); /* Subtle shadow for depth */
+        }
+
+        .logo-text h1 {
+            margin: 0;
+            font-size: 1.8em;
+            color: var(--primary-dark-blue);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            margin: 0;
+            font-size: 0.8em;
+            color: var(--secondary-teal);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Navigation */
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color var(--transition-speed);
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary-teal);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none; /* Hidden on desktop */
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--primary-dark-blue);
+        }
+
+        /* Hero Section */
+        /* Basic reset and box-sizing for consistent layout (if you don't already have these) */
+/* If you already have these in your CSS, you don't need to duplicate them. */
+*, *::before, *::after {
+    box-sizing: border-box;
+    /* margin: 0; */ /* You might have global margin/padding resets, check first */
+    /* padding: 0; */
+}
+
+body {
+    /* Only include body styles if you want to override existing ones or if they don't exist */
+    /* font-family: Arial, sans-serif; */
+    /* line-height: 1.6; */
+    /* background-color: #f4f4f4; */
+    /* color: #333; */
+}
+
+/* --- Section: Hero Section with Multi-Image Background --- */
+
+.hero-section {
+    position: relative; /* Essential for positioning child elements */
+    width: 100%;
+    min-height: 500px; /* Adjust as needed - gives space for images and content */
+    overflow: hidden; /* Important if images might extend beyond the section */
+    display: flex; /* Helps with content positioning */
+    align-items: center; /* Vertically center content */
+    justify-content: center; /* Horizontally center content */
+    text-align: center; /* Center text within the content area */
+    padding: 20px; /* Add some padding around the content */
+}
+
+.background-images {
+    position: absolute; /* Position relative to .hero-section */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Puts the images behind the content */
+}
+
+.bg-image {
+    position: absolute; /* Position relative to .background-images */
+    object-fit: cover; /* Ensures images cover the area without distortion */
+    opacity: 0.7; /* Adjust opacity if you want them less prominent */
+    transition: all 0.3s ease-in-out; /* Smooth transitions for responsiveness */
+}
+
+/* Individual positioning and sizing of images (adjust as needed) */
+.image-1 {
+    top: 5%;
+    left: 5%;
+    width: 45%;
+    height: 60%;
+    filter: grayscale(50%);
+}
+
+.image-2 {
+    bottom: 10%;
+    right: 5%;
+    width: 40%;
+    height: 55%;
+    opacity: 0.6;
+    transform: rotate(-3deg);
+}
+
+.image-3 {
+    top: 20%;
+    left: 40%;
+    width: 35%;
+    height: 45%;
+    opacity: 0.5;
+    z-index: 0;
+}
+
+/* Styling for the content to ensure it's on top */
+.content {
+    position: relative; /* Essential to bring content above images */
+    z-index: 2; /* Puts content on top of the images */
+    color: white; /* Example text color */
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.4); /* Slightly dark overlay for readability */
+    border-radius: 10px;
+    max-width: 800px; /* Limit content width */
+    margin: 0 auto; /* Center content block */
+}
+
+.content h1 {
+    font-size: 2.8em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.content p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.content button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive adjustments using Media Queries */
+
+/* Tablets and smaller desktops */
+@media (max-width: 992px) {
+    .hero-section {
+        min-height: 450px;
+    }
+
+    .image-1 {
+        width: 55%;
+        height: 70%;
+        top: 0;
+        left: 0;
+    }
+
+    .image-2 {
+        width: 50%;
+        height: 65%;
+        bottom: 0;
+        right: 0;
+    }
+
+    .image-3 {
+        width: 45%;
+        height: 55%;
+        top: 15%;
+        left: 30%;
+    }
+
+    .content h1 {
+        font-size: 2.2em;
+    }
+
+    .content p {
+        font-size: 1.1em;
+    }
+}
+
+/* Large phones and small tablets */
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 400px;
+    }
+
+    .image-1 {
+        width: 65%;
+        height: 60%;
+        top: 0;
+        left: 0;
+    }
+
+    .image-2 {
+        width: 55%;
+        height: 50%;
+        bottom: 0;
+        right: 0;
+    }
+
+    .image-3 {
+        width: 50%;
+        height: 40%;
+        top: 10%;
+        left: 20%;
+    }
+
+    .content {
+        padding: 30px;
+    }
+
+    .content h1 {
+        font-size: 1.8em;
+    }
+
+    .content p {
+        font-size: 1em;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    .hero-section {
+        min-height: 350px;
+        display: block; /* Allows content to flow after images if images become static */
+        padding: 15px;
+    }
+
+    .background-images {
+        position: static; /* Allows images to flow naturally in the document flow */
+        height: auto; /* Height adapts to content */
+        margin-bottom: 20px; /* Space between images and content */
+        display: flex; /* Use flexbox to arrange images within their container */
+        flex-wrap: wrap; /* Allow images to wrap to the next line */
+        justify-content: center; /* Center images horizontally */
+        align-items: flex-start; /* Align images to the start vertically */
+    }
+
+    .bg-image {
+        position: static; /* Remove absolute positioning */
+        width: 80%; /* Images take a larger portion of the width */
+        max-width: 300px; /* Limit maximum size */
+        height: auto; /* Maintain aspect ratio */
+        margin: 10px auto; /* Center individual images and add vertical space */
+        opacity: 0.8;
+        transform: none; /* Remove any rotations */
+        filter: none; /* Remove any filters */
+    }
+
+    .image-1, .image-2, .image-3 {
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        order: 1;
+    }
+    .image-2 { order: 2; }
+    .image-3 { order: 3; }
+
+    
+}
+        .hero {
+            background: linear-gradient(rgba(10, 28, 56, 0.85), rgba(10, 28, 56, 0.85)), url('https://via.placeholder.com/1500x600/0A1C38/00BCD4?text=Telehealth+Background') no-repeat center center/cover;
+            color: var(--background-white);
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: var(--accent-cyan);
+        }
+
+        .hero p {
+            font-size: 1.1em;
+            max-width: 900px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .hero .btn-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-cyan);
+            color: var(--primary-dark-blue);
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .btn:hover {
+            background-color: #0097A7; /* Slightly darker cyan */
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--primary-dark-blue);
+            color: var(--background-white);
+        }
+        .btn-secondary:hover {
+            background-color: var(--secondary-teal);
+            color: var(--background-white);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+            background-color: var(--background-white);
+            margin-bottom: 30px;
+            box-shadow: 0 0 15px var(--shadow-light);
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        section:first-of-type {
+            margin-top: 0; /* No top margin for the first section after hero */
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        section:last-of-type {
+            margin-bottom: 0; /* No bottom margin for the last section */
+        }
+
+
+        h2 {
+            font-size: 2.5em;
+            color: var(--primary-dark-blue);
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-cyan);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -15px;
+            border-radius: 2px;
+        }
+
+        /* About Us Section */
+        .about-us-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: center;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .team-member {
+            background-color: var(--background-light);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform var(--transition-speed);
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 4px solid var(--secondary-teal);
+        }
+
+        .team-member h3 {
+            color: var(--primary-dark-blue);
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+
+        .team-member p {
+            color: var(--text-light);
+            font-size: 0.95em;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--background-light);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform var(--transition-speed);
+            border-top: 5px solid var(--secondary-teal);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            color: var(--primary-dark-blue);
+            font-size: 1.4em;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+        }
+
+        .service-details {
+            margin-top: 60px;
+        }
+
+        .service-details h3 {
+            font-size: 2em;
+            color: var(--primary-dark-blue);
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--accent-cyan);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .service-detail-item {
+            background-color: var(--background-light);
+            border-left: 5px solid var(--accent-cyan);
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+        }
+        .service-detail-item h4 {
+            color: var(--primary-dark-blue);
+            font-size: 1.2em;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .service-detail-item p {
+            color: var(--text-light);
+        }
+
+
+        /* Pricing Section */
+        .pricing-category {
+            margin-bottom: 60px;
+        }
+        .pricing-category h3 {
+            font-size: 1.8em;
+            color: var(--primary-dark-blue);
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .pricing-category h3::after {
+            content: '';
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-cyan);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            border-radius: 2px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .pricing-card {
+            background-color: var(--background-white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            border: 2px solid var(--border-light);
+            transition: border-color var(--transition-speed), transform var(--transition-speed);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--secondary-teal);
+            transform: translateY(-5px);
+        }
+
+        .pricing-card h4 {
+            font-size: 1.6em;
+            color: var(--primary-dark-blue);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .pricing-card .price-display {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 20px;
+        }
+
+        .pricing-card .price-display span {
+            font-size: 0.6em;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+            text-align: left;
+            flex-grow: 1; /* Allows list to take up available space */
+        }
+
+        .pricing-card ul li {
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--border-light);
+            color: var(--text-light);
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .pricing-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        /* Testimonials Section */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: var(--background-light);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            font-style: italic;
+            color: var(--text-light);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '“';
+            font-family: serif; /* Use a classic serif for quotes */
+            font-size: 4em;
+            color: var(--accent-cyan);
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            opacity: 0.2;
+            line-height: 0.8;
+            z-index: 1;
+        }
+
+        .testimonial-card p:first-of-type {
+            margin-top: 20px; /* Adjust for the large quote mark */
+            z-index: 2;
+            position: relative;
+        }
+
+        .testimonial-card .author {
+            font-style: normal;
+            font-weight: 600;
+            color: var(--primary-dark-blue);
+            margin-top: 15px;
+            text-align: right;
+            display: block;
+        }
+
+        /* FAQs Section */
+        .faq-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: var(--background-white);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .faq-item h3 {
+            color: var(--primary-dark-blue);
+            padding: 18px 25px;
+            margin: 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.15em;
+            background-color: var(--background-light);
+            transition: background-color var(--transition-speed);
+        }
+
+        .faq-item h3:hover {
+            background-color: #eef1f0;
+        }
+
+        .faq-item h3::after {
+            content: '+';
+            font-size: 1.5em;
+            transition: transform var(--transition-speed);
+        }
+
+        .faq-item.active h3::after {
+            content: '-';
+            transform: rotate(180deg);
+        }
+
+        .faq-item p {
+            padding: 0 25px 20px 25px;
+            margin: 0;
+            color: var(--text-light);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+        }
+
+        .faq-item.active p {
+            max-height: 200px; /* Max height to allow transition, adjust as needed */
+            padding-top: 10px;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .contact-info p {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .contact-info a {
+            color: var(--primary-dark-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color var(--transition-speed);
+        }
+        .contact-info a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--background-light);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-dark-blue);
+            font-size: 0.95em;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: calc(100% - 24px); /* Account for padding */
+            padding: 12px;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            font-size: 1em;
+            color: var(--text-dark);
+            transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent-cyan);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark-blue);
+            color: var(--background-white);
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.9em;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer .social-links a {
+            color: var(--background-white);
+            margin: 0 12px;
+            font-size: 1.6em;
+            transition: color var(--transition-speed);
+        }
+
+        footer .social-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            h2 {
+                font-size: 2em;
+            }
+            nav ul li {
+                margin-left: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .logo-container {
+                margin-bottom: 15px;
+            }
+            nav {
+                width: 100%;
+            }
+            nav ul {
+                flex-direction: column;
+                display: none; /* Hidden by default for mobile */
+                width: 100%;
+                background-color: var(--background-white);
+                box-shadow: var(--shadow-light);
+                position: absolute;
+                top: 80px; /* Adjust based on header height */
+                left: 0;
+            }
+            nav ul.open {
+                display: flex;
+            }
+            nav ul li {
+                margin: 0;
+                padding: 12px 0;
+                border-bottom: 1px solid var(--border-light);
+            }
+            nav ul li:last-child {
+                border-bottom: none;
+            }
+            nav ul li a {
+                color: var(--primary-dark-blue);
+                display: block;
+            }
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 20px;
+            }
+
+            .hero {
+                padding: 80px 15px;
+            }
+            .hero h1 {
+                font-size: 2em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+
+            section {
+                padding: 50px 0;
+            }
+            h2 {
+                font-size: 1.8em;
+                margin-bottom: 40px;
+            }
+
+            .team-grid, .services-grid, .pricing-grid, .testimonial-grid {
+                grid-template-columns: 1fr; /* Stack columns on small screens */
+            }
+
+            .contact-form {
+                padding: 25px;
+            }
+
+            .btn {
+                padding: 12px 20px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text h1 {
+                font-size: 1.5em;
+            }
+            .logo-text p {
+                font-size: 0.7em;
+            }
+            .logo {
+                max-height: 40px;
+            }
+            .hero h1 {
+                font-size: 1.8em;
+            }
+            .hero p {
+                font-size: 0.9em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .pricing-card .price-display {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <div class="logo-container">
+                <img src="lakeviewlogo.jpg"  alt="Lakeview Health Services Logo" class="logo">
+                <div class="logo-text">
+                    <h1>Lakeview</h1>
+                    <p>Health Services Limited</p>
+                </div>
+            </div>
+            <div class="menu-toggle" id="mobile-menu">&#9776;</div>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#team">Meet Our Team</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#book">Book Appointment</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="background-images">
+                <img src="image1.jpg" alt="Description of image 1" class="bg-image image-1">
+                <img src="image2.png" alt="Description of image 2" class="bg-image image-2">
+                <img src="image3.png" alt="Description of image 3" class="bg-image image-3">
+            </div>
+            <div class="content">
+                <h1>Welcome to Lakeview Health Services Limited</h1>
+            <p>Bringing affordable, accessible, and professional home-based and virtual healthcare to your doorstep. We bridge the gap between patients and quality care through innovative telehealth and in-person services.</p>
+            </div>
+            <div class="btn-group">
+                <a href="#book" class="btn">Book Appointment</a>
+                <a href="#services" class="btn btn-secondary">Our Services</a>
+                <a href="#doctors" class="btn btn-secondary">Meet Our Team</a>
+            </div>
+        </section>
+
+        <section id="about" class="container">
+            <h2>About Us</h2>
+            <div class="about-us-content">
+                <p><strong>Who We Are</strong></p>
+                <p>Lakeview Health Services Limited is a registered healthcare company delivering hybrid medical services, combining virtual telehealth consultations with in-person care tailored to corporate organizations, schools, remote job sites, and individuals. With a foundation in family medicine, accident & emergency and occupational health, Lakeview seeks to fill the urgent need for reliable, on-demand, and cost-effective healthcare access across urban and remote locations.<br><br>Our services include teleconsultations, workplace health screenings, emergency response training, pre-employment medicals, and wellness initiatives. We aim to be the leading provider of flexible, client-focused corporate health solutions in Nigeria.</p>
+                <p><strong>Vision Statement:</strong> To become the most trusted provider of on-demand corporate and community healthcare services in Nigeria and beyond.</p>
+                <p><strong>Mission Statement:</strong> To deliver professional, responsive, and reliable medical services that improve the health and productivity of the workforce and communities.</p>
+            </div>
+        </section>
+
+        <section id="team" class="container">
+            <h2>Meet Our team</h2>
+            <p style="text-align: center; margin-bottom: 40px; color: var(--text-light);">Get to know our multidisciplinary team of certified medical professionals:</p>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/120/E6E6E6/246E71?text=Dr" alt="Dr. Fola Aluko">
+                    <h3>Dr. Fola Aluko</h3>
+                    <p>General Practitioner</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/120/E6E6E6/246E71?text=Nurse" alt="Nurse Judith Obi">
+                    <h3>Nurse Judith Obi</h3>
+                    <p>Home Care Nurse (Phlebotomy Specialist)</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/120/E6E6E6/246E71?text=Dr" alt="Dr. Osaro Akpede">
+                    <h3>Dr. Osaro Akpede</h3>
+                    <p>Family Medicine Consultant</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/120/E6E6E6/246E71?text=Nurse" alt="Nurse Taiwo Ogunleye">
+                    <h3>Nurse Taiwo Ogunleye</h3>
+                    <p>Occupational Health Nurse</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 30px; font-style: italic; color: var(--text-light);">Each team member is handpicked for excellence, empathy, and ethics.</p>
+        </section>
+
+        <section id="book" class="container">
+            <h2>Book Appointment</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: var(--text-light);">Schedule Your Visit or Virtual Consultation. Choose a service, pick a time, and our team will be in touch.</p>
+            <form id="bookingForm" class="contact-form">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="contactNumber">Contact Number</label>
+                    <input type="tel" id="contactNumber" name="contactNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="bookingEmail">Email</label>
+                    <input type="email" id="bookingEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="serviceRequired">Service Required</label>
+                    <input type="text" id="serviceRequired" name="serviceRequired" required>
+                </div>
+                <div class="form-group">
+                    <label for="preferredDateTime">Preferred Date & Time</label>
+                    <input type="datetime-local" id="preferredDateTime" name="preferredDateTime">
+                </div>
+                <button type="submit" class="btn">Submit Appointment Request</button>
+            </form>
+        </section>
+
+        <section id="services" class="container">
+            <h2>Services We Provide</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Home-based Doctor Visits</h3>
+                    <p>General consultations, chronic care follow-up, post-surgical care, and more.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Sample Collection & Phlebotomy</h3>
+                    <p>Experienced nurses visit your location for painless and professional sample collection.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Virtual Medical Consultations</h3>
+                    <p>Speak to qualified doctors via video or audio at your convenience.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Nursing Care Services</h3>
+                    <p>Wound dressing, BP checks, injections, and other vital nursing care.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Health Education & Medication Reminders</h3>
+                    <p>Personalized health advice and timely medication reminders.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Corporate Staff Health Screening</h3>
+                    <p>Comprehensive health screening programs for your corporate staff.</p>
+                </div>
+            </div>
+
+            <div class="service-details">
+                <h3>Services Details</h3>
+                <div class="service-detail-item">
+                    <h4>Phlebotomy & Sample Collection</h4>
+                    <p>Experienced nurses visit your location for painless and professional sample collection.</p>
+                </div>
+                <div class="service-detail-item">
+                    <h4>Telemedicine</h4>
+                    <p>Speak to qualified doctors via video or audio at your convenience.</p>
+                </div>
+                <div class="service-detail-item">
+                    <h4>Home Visits</h4>
+                    <p>General consultations, chronic care follow-up, post-surgical care, and more.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="container">
+            <h2>Affordable & Transparent Pricing</h2>
+            <p style="text-align: center; margin-bottom: 40px; color: var(--text-light);">Choose from flexible packages:</p>
+
+            <div class="pricing-category">
+                <h3>Per-Visit / One-Time Consultation</h3>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h4>One-Time Telehealth Consultation</h4>
+                        <div class="price-display">₦10,000<span>/consultation</span></div>
+                        <ul>
+                            <li>Up to 20 mins virtual assessment</li>
+                            <li>Basic health advice(non-emergency) & education</li>
+                            <li>48-hour chat follow-up</li>
+                            <li>Saves transport cost & time</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn pricing-action-btn" data-plan="One-Time Telehealth (₦10,000)">Book Now</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h4>Home-Based Care - Category A </h4>
+                        <div class="price-display">₦20,000<span>/visit</span></div>
+                        <ul>
+                            <li>Vital signs check</li>
+                            <li>Simple Catheter care</li>
+                            <li>Wound dressing(Clean wound)</li>
+                            <li>Basic medication(oral and injections) admin.</li>
+                            <li>Basic patient assessment and Health advice</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn pricing-action-btn" data-plan="Home Care - Cat A (₦20,000)">Request Service</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h4>Home-Based Care - Category B</h4>
+                        <div class="price-display">₦35,000<span>/visit</span></div>
+                        <ul>
+                            <li>Complex wound dressing</li>
+                            <li>IV fluid monitoring & admin.</li>
+                            <li>Initial post-op checks</li>
+                            <li>Basic Stoma Care and Patient Education </li>
+                            <li>Detailed patient assessment and are plan review</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn pricing-action-btn" data-plan="Home Care - Cat B (₦35,000)">Request Service</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h4>Home-Based Care - Category C</h4>
+                        <div class="price-display">₦55,000<span>/visit</span></div>
+                        <ul>
+                            <li>Intensive post-op care</li>
+                            <li>Specialized IV medication admin. (Prescription)</li>
+                            <li>Comprehensive Paien Eduaion (eg. Devie training)</li>
+                            <li>Extended condition monitoring</li>
+                            <li>Family health education session</li>
+                            <li>Specialized Palliative Care support</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn pricing-action-btn" data-plan="Home Care - Cat C (₦55,000)">Request Service</a>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 30px; font-style: italic; color: var(--text-light);">Add-ons: Distance Surcharge (₦2,500 - ₦5,000) | After-Hours/Weekend Fee (+20% of visit fee).</p>
+            </div>
+
+            <div class="pricing-category">
+                <h3>Subscription Plans (Monthly)</h3>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h4>Individual Basic Plan</h4>
+                        <div class="price-display">₦50,000<span>/month</span></div>
+                        <ul>
+                            <li>Unlimited telehealth Consultation</li>
+                            <li>Priority booking</li>
+                            <li>1 Free home visit (Category A)</li>
+                            <li>10% discount on any home visit</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn pricing-action-btn" data-plan="Individual Basic Plan (₦50,000/month)">Choose Plan</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h4>Individual Premium Plan</h4>
+                        <div class="price-display">₦120,000<span>/month</span></div>
+                        <ul>
+                            <li>Unlimited telehealth Consultation</li>
+                            <li>2 FREE Home Visit/Month (Cat A or B)</li>
+                            <li>Priority booking & extended hours</li>
+                            <li>15% discount on additional visits</li>
+                            <li>Home sample collection</li>
+                            <li>Dedicated nurse care coordinator</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn pricing-action-btn" data-plan="Individual Premium Plan (₦120,000/month)">Choose Plan</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h4>Student Plan</h4>
+                        <div class="price-display">₦20,000<span>/month</span></div>
+                        <ul>
+                            <li>Unlimited nurse-led telehealth</li>
+                            <li>Student health resources</li>
+                            <li>Optional: ₦7,500 flat fee for 1 Cat A Home Visit/semester</li>
+                            <li>Access to Student-focused health education resources</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn pricing-action-btn" data-plan="Student Plan (₦20,000/month)">Choose Plan</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h4>Couple Premium Plan</h4>
+                        <div class="price-display">₦200,000<span>/month</span></div>
+                        <ul>
+                            <li>Unlimited telehealth for 2 persons</li>
+                            <li>5 FREE Home Visits/Month (Cat A or B, shared)</li>
+                            <li>Priority booking & extended hours</li>
+                            <li>15% discount on additional visits</li>
+                            <li>1 Pre/post-natal virtual/home support visit</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn pricing-action-btn" data-plan="Couple Premium Plan (₦200,000/month)">Choose Plan</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h4>Family Premium Plan (up to 6 persons)</h4>
+                        <div class="price-display">₦400,000<span>/month</span></div>
+                        <ul>
+                            <li>Unlimited telehealth for 6 named members</li>
+                            <li>7 FREE Home Visits/Month (Mix A/B, shared)</li>
+                            <li>Annual virtual health assessment</li>
+                            <li>20% discount on additional visits</li>
+                            <li>Dedicated care coordinator</li>
+                            <li>One Vitual health workshop/Q&A Session per quarter for your family</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn pricing-action-btn" data-plan="Family Premium Plan (₦400,000/month)">Choose Plan</a>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 30px; font-style: italic; color: var(--text-light);">Custom corporate packages available on request.</p>
+            </div>
+        </section>
+
+        <section id="testimonials" class="container">
+            <h2>What Our Clients Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p>“Lakeview has been a game-changer for my family. We no longer queue at hospitals.”</p>
+                    <p class="author">— Mrs. Nkechi Obinna</p>
+                </div>
+                <div class="testimonial-card">
+                    <p>“Their phlebotomy service is top-notch. The nurses are kind and skilled.”</p>
+                    <p class="author">— Mr. Ayodele Benson</p>
+                </div>
+                <div class="testimonial-card">
+                    <p>“Lakeview helped us set up a complete staff health plan. Great value!”</p>
+                    <p class="author">— HR Manager, Genesis Corp.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="faqs" class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h3>Q1: Are your services available nationwide?</h3>
+                    <p>A: We currently operate in Lagos and some other states in nigeria with plans for expansion nationwide.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Q2: What are your working hours?</h3>
+                    <p>A: 8AM – 6PM daily. Emergency care available on request.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Q3: Can I book services for my elderly parents?</h3>
+                    <p>A: Absolutely. We offer elderly-focused care packages.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Q4: What if I need to reschedule my home visit?</h3>
+                    <p>A: Please contact us at least 24 hours in advance to reschedule without incurring any fees.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Q5: Is my virtual consultation data secure?</h3>
+                    <p>A: Yes, we use secure and encrypted platforms to ensure the privacy and confidentiality of your consultations.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="container">
+            <h2>Recent Projects</h2>
+            <p style="text-align: center; margin-bottom: 40px; color: var(--text-light);">Showcasing our commitment to accessible healthcare solutions.</p>
+            <div class="services-grid"> <div class="service-card">
+                    <h3>Corporate Health Project: XYZ Tech Ltd</h3>
+                    <p>We executed a 2-week staff wellness program including vitals check, mental health talks, and flu vaccines.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Telemedicine Camp: Edo Rural Clinics</h3>
+                    <p>Over 100 patients consulted via video for various ailments.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Diabetes Monitoring Home Service</h3>
+                    <p>Long-term home-based monitoring and management support for diabetes patients.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog" class="container">
+            <h2>News & Blog</h2>
+            <p style="text-align: center; margin-bottom: 40px; color: var(--text-light);">Stay informed with our latest articles and health insights.</p>
+            <div class="services-grid"> <div class="service-card">
+                    <h3>Top 5 Benefits of Home Health Care in Nigeria</h3>
+                    <p>Discover how home health care is transforming patient experiences and outcomes.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Why Telemedicine is the Future of African Healthcare</h3>
+                    <p>Exploring the potential of virtual consultations to bridge healthcare gaps.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Simple Health Checks You Can Do at Home</h3>
+                    <p>Empower yourself with easy, routine health checks from the comfort of your home.</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 30px; font-style: italic; color: var(--text-light);">Read more on our blog for comprehensive health topics and updates.</p>
+        </section>
+
+
+        <section id="contact" class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-info">
+                <p>Have questions or need to speak with a healthcare professional? We’re here for you.</p>
+                <p>📞 <a href="tel:+2349121675872">+234-912-167-5872</a></p>
+                <p>📧 <a href="mailto:Lakeviewhealthservices1@gmail.com">Lakeviewhealthservices1@gmail.com</a></p>
+                <p>📍 Lagos | Nigeria</p>
+            </div>
+            <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                    <label for="contactName">Name</label>
+                    <input type="text" id="contactName" name="Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="contactEmail">Email</label>
+                    <input type="email" id="contactEmail" name="Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="contactMessage">Message</label>
+                    <textarea id="contactMessage" name="Message" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Ready to experience healthcare redefined?</p>
+            <p>Visit us on WhatsApp, Instagram, or call today!</p>
+            <div class="social-links">
+                <a href="https://wa.me/2349121675872?text=Hello%20Lakeview%20Health%20Services%2C%20I%20have%20a%20question." target="_blank" aria-label="WhatsApp"><img src="wa.jpg" width="30" height="30" alt="WhatsApp"></a>
+                <a href="https://www.facebook.com/share/18oF6tgnL7/" target="_blank" aria-label="Facebook"><img src="fb.jpg" width="30" height="30" alt="Facebook"></a>
+                <a href="https://instagram.com/LakeviewHSL" target="_blank" aria-label="Instagram"><img src="ig.jpg" width="30" height="30" alt="Instagram"></a>
+                <a href="https://twitter.com/LakeviewHSL" target="_blank" aria-label="Twitter/X"><img src="X.jpg" width="30" height="30" alt="Twitter/X"></a>
+            </div>
+            <p>&copy; 2025 Lakeview Health Services Limited. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.getElementById('nav-links');
+
+            mobileMenu.addEventListener('click', function() {
+                navLinks.classList.toggle('open');
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('nav ul li a').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    // Close mobile menu after clicking a link
+                    if (navLinks.classList.contains('open')) {
+                        navLinks.classList.remove('open');
+                    }
+                });
+            });
+
+            // FAQ accordion functionality
+            document.querySelectorAll('.faq-item h3').forEach(item => {
+                item.addEventListener('click', function() {
+                    const parent = this.parentNode;
+                    parent.classList.toggle('active');
+
+                    const content = this.nextElementSibling; // This is the <p> tag
+                    if (parent.classList.contains('active')) {
+                        content.style.maxHeight = content.scrollHeight + "px"; // Set max-height to scrollHeight
+                    } else {
+                        content.style.maxHeight = "0"; // Collapse
+                    }
+                });
+            });
+
+            // Handle Booking Form Submission
+            document.getElementById('bookingForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                const fullName = document.getElementById('fullName').value;
+                const contactNumber = document.getElementById('contactNumber').value;
+                const email = document.getElementById('bookingEmail').value; // Corrected ID
+                const serviceRequired = document.getElementById('serviceRequired').value;
+                const preferredDateTime = document.getElementById('preferredDateTime').value;
+
+                const baseMessage = `Hello Lakeview Health Services, I'd like to book an appointment with the following details:<br>Full Name: ${fullName}Contact Number: ${contactNumber}%0AEmail: ${email} Service Required: ${serviceRequired} Preferred Date & Time: ${preferredDateTime}Please confirm my booking. Thank you!`;
+
+                // Open WhatsApp
+                const whatsappUrl = `https://wa.me/2349121675872?text=${encodeURIComponent(baseMessage)}`;
+                window.open(whatsappUrl, '_blank');
+
+                // Open Email
+                const emailSubject = `New Appointment Request from ${fullName}`;
+                const emailBody = baseMessage.replace(/%0A/g, '\n'); // Convert WhatsApp newlines to email newlines
+                const mailtoLink = `mailto:Lakeviewhealthservices1@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                window.open(mailtoLink);
+
+                alert('Your appointment request has been sent to Lakeview Health Services via WhatsApp and Email! We will get back to you shortly.');
+                this.reset(); // Clear the form
+            });
+
+            // Handle Pricing Section Buttons (WhatsApp & Email for Plans/Services)
+            document.querySelectorAll('.pricing-action-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const planName = this.getAttribute('data-plan');
+                    const message = `Hello Lakeview Health Services, I am interested in the following service/plan: ${planName} Please provide more information or help me proceed. Thank you!`;
+                    const emailSubject = `Inquiry about ${planName}`;
+                    const emailBody = message.replace(/%0A/g, '\n');
+
+                    // Open WhatsApp
+                    const whatsappUrl = `https://wa.me/2349121675872?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappUrl, '_blank');
+
+                    // Open Email
+                    const mailtoLink = `mailto:Lakeviewhealthservices1@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                    window.open(mailtoLink);
+
+                    alert(`Your inquiry for "${planName}" has been sent via WhatsApp and Email! We will respond shortly.`);
+                });
+            });
+
+            // Handle Contact Form Submission
+            document.getElementById('contactForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                const name = document.getElementById('contactName').value;
+                const email = document.getElementById('contactEmail').value;
+                const message = document.getElementById('contactMessage').value;
+
+                const emailSubject = `Message from Website by ${name}`;
+                const emailBody = `Name: ${name}\nEmail: ${email}\nMessage: ${message}`;
+                const mailtoLink = `mailto:Lakeviewhealthservices1@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+
+                window.location.href = mailtoLink; // This will trigger the email client
+
+                alert('Your message will now open in your email client. Please send it from there!');
+                this.reset(); // Clear the form
+            });
+        });
+    </script>
+</body>
+</html>
