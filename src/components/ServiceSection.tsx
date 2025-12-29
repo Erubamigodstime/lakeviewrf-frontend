@@ -10,9 +10,9 @@ interface Service {
 
 export default function ServiceSection() {
   const [services, setServices] = useState<Service[]>([]);
-  const [details, setDetails] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [details, setDetails] = useState<Service[]>([]);
 
   useEffect(() => {
     async function fetchServices() {
@@ -21,8 +21,17 @@ export default function ServiceSection() {
         if (!res.ok) throw new Error("Failed to fetch services");
         const data = await res.json();
 
-        setServices(data.services || []);
-        setDetails(data.details || []);
+        // Services is required
+        if (!data.services || !Array.isArray(data.services)) {
+          throw new Error("Invalid response: services data is required");
+        }
+
+        setServices(data.services);
+
+        // Details is optional - only set if available
+        if (data.details && Array.isArray(data.details)) {
+          setDetails(data.details);
+        }
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(err.message);
@@ -48,7 +57,7 @@ export default function ServiceSection() {
   if (error) {
     return (
       <section id="services" className="container  mx-auto py-12 text-center">
-        <p className="text-red-500">⚠️ {error}</p>
+        <p className="text-red-500"> {error}</p>
       </section>
     );
   }
@@ -77,13 +86,10 @@ export default function ServiceSection() {
           </div>
         ))}
       </div>
-
       </div>
-
-
       {/* Service Details */}
       <div className="mt-16">
-        <h3 className="text-2xl font-bold text-[#0A1C38] text-center mb-8 border-b-2 border-cyan-400 inline-block pb-2">
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0A1C38] text-center mb-8 border-b-2 border-cyan-400 inline-block pb-2">
           Services Details
         </h3>
 

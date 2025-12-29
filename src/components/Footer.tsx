@@ -116,7 +116,7 @@ export default function FooterSection() {
       </div>
 
       {/* Back to Top Button */}
-      {showScroll && (
+      {/* {showScroll && (
         <button
           onClick={scrollToTop}
           aria-label="Back to Top"
@@ -127,7 +127,7 @@ export default function FooterSection() {
             className="text-white"
             strokeWidth={1.5}/> 
         </button>
-      )}
+      )} */}
     </footer>
   );
 }

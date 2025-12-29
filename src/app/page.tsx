@@ -3,7 +3,6 @@ import Hero from "@/components/Hero";
 import ServiceSection from "@/components/ServiceSection";
 import Pricing from "@/components/PricingSection";
 import FaqSection from "@/components/FaqSection";
-import BookingForm from "@/components/BookingForm";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import About from "@/components/About";
@@ -22,7 +21,6 @@ export default function Home() {
       <Hero />
       <About />
       <Team/>
-      <BookingForm />
       <ServiceSection />
       <Pricing />
       <TestimonialSection />

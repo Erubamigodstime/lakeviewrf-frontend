@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-// Mock services data (could later come from DB)
+// Mock services data 
 const services = [
   {
     id: "1",

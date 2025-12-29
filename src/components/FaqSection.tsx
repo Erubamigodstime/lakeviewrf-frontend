@@ -21,8 +21,14 @@ export default function FaqSection() {
         const res = await fetch("/api/faqs");
         if (!res.ok) throw new Error("Failed to fetch FAQs");
         const data = await res.json();
-        setTitle(data.title);
-        setFaqs(data.items || []);
+        
+        // Frontend API returns { title, items }
+        if (data.title && Array.isArray(data.items)) {
+          setTitle(data.title);
+          setFaqs(data.items);
+        } else {
+          throw new Error("Invalid data format");
+        }
       } catch (err: unknown) {
         if (err instanceof Error) setError(err.message);
         else setError("Something went wrong");

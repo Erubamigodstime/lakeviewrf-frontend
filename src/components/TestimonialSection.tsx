@@ -19,8 +19,14 @@ export default function TestimonialSection() {
         const res = await fetch("/api/testimonials");
         if (!res.ok) throw new Error("Failed to fetch testimonials");
         const data = await res.json();
-        setTitle(data.title);
-        setTestimonials(data.testimonials || []);
+        
+        // Frontend API returns { title, testimonials }
+        if (data.title && Array.isArray(data.testimonials)) {
+          setTitle(data.title);
+          setTestimonials(data.testimonials);
+        } else {
+          throw new Error("Invalid data format");
+        }
       } catch (err: unknown) {
         if (err instanceof Error) setError(err.message);
         else setError("Something went wrong");

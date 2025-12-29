@@ -5,6 +5,8 @@ import React, { useState } from "react";
 interface FormData {
   name: string;
   email: string;
+  phone: string;
+  subject: string;
   message: string;
 }
 
@@ -12,6 +14,8 @@ const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
+    phone: "",
+    subject: "",
     message: "",
   });
 
@@ -28,6 +32,7 @@ const ContactSection: React.FC = () => {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Invalid email format";
     }
+    if (!formData.subject.trim()) newErrors.subject = "Subject is required";
     if (!formData.message.trim()) newErrors.message = "Message is required";
 
     setErrors(newErrors);
@@ -49,7 +54,7 @@ const ContactSection: React.FC = () => {
     setStatus(null);
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("http://localhost:5000/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -57,11 +62,11 @@ const ContactSection: React.FC = () => {
 
       if (!res.ok) throw new Error("Failed to send message");
       setStatus("Message sent successfully!");
-      setFormData({ name: "", email: "", message: "" });
-    }catch (err) {
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+    } catch (err) {
       console.error("Error submitting contact form:", err);
       setStatus("An error occurred. Please try again later.");
-    }finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -149,6 +154,49 @@ const ContactSection: React.FC = () => {
           />
           {errors.email && (
             <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+          )}
+        </div>
+
+        {/* Phone */}
+        <div className="mb-6">
+          <label
+            htmlFor="phone"
+            className="block mb-2 font-semibold text-[#0A1C38]"
+          >
+            Phone (Optional)
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            className="w-full bg-white px-4 py-3 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-cyan-200"
+            value={formData.phone}
+            onChange={handleChange}
+          />
+        </div>
+
+        {/* Subject */}
+        <div className="mb-6">
+          <label
+            htmlFor="subject"
+            className="block mb-2 font-semibold text-[#0A1C38]"
+          >
+            Subject
+          </label>
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            className={`w-full bg-white px-4 py-3 border rounded-md text-gray-800 focus:outline-none focus:ring-2 ${
+              errors.subject
+                ? "border-red-500 focus:ring-red-200"
+                : "border-gray-300 focus:ring-cyan-200"
+            }`}
+            value={formData.subject}
+            onChange={handleChange}
+          />
+          {errors.subject && (
+            <p className="text-red-500 text-sm mt-1">{errors.subject}</p>
           )}
         </div>
 

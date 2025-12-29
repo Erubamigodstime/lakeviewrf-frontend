@@ -4,6 +4,19 @@ import React, { useEffect, useState } from "react";
 import PricingCard from "./PricingCard";
 
 interface PricingPlan {
+  id: string;
+  name: string;
+  price: number;
+  currency: string;
+  duration: string;
+  category: string;
+  features: string[];
+  isPopular?: boolean;
+  isActive?: boolean;
+}
+
+interface TransformedPlan {
+  id: string;
   title: string;
   price: string;
   period: string;
@@ -13,19 +26,22 @@ interface PricingPlan {
 }
 
 const PricingSection: React.FC = () => {
-  const [plans, setPlans] = useState<PricingPlan[]>([]);
+  const [plans, setPlans] = useState<TransformedPlan[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+    
     async function fetchPricing() {
       try {
         const res = await fetch("/api/pricing");
         if (!res.ok) throw new Error("Failed to fetch pricing");
 
-        const data: { plans: PricingPlan[] } = await res.json();
+        const data = await res.json();
 
-        // ✅ Validate API response
+        // Frontend API returns { plans: [...] }
         if (!data.plans || !Array.isArray(data.plans)) {
           throw new Error("Invalid data format from API");
         }
@@ -45,18 +61,46 @@ const PricingSection: React.FC = () => {
     fetchPricing();
   }, []);
 
+  // Prevent hydration mismatch by not rendering until mounted
+  if (!mounted) {
+    return (
+      <section id="pricing" className="max-w-7xl mt-7 bg-white mx-auto px-5 py-20">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-[#0A1C38] mb-4">
+          Affordable & Transparent Pricing
+        </h2>
+        <p className="text-center mb-10 text-gray-600">
+          Choose from flexible packages:
+        </p>
+        <div className="text-center py-10">
+          <p className="text-gray-600">Loading pricing...</p>
+        </div>
+      </section>
+    );
+  }
+
   if (loading) {
     return (
-      <section className="text-center py-20">
-        <p className="text-gray-600">Loading pricing...</p>
+      <section id="pricing" className="max-w-7xl mt-7 bg-white mx-auto px-5 py-20">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-[#0A1C38] mb-4">
+          Affordable & Transparent Pricing
+        </h2>
+        <p className="text-center mb-10 text-gray-600">
+          Choose from flexible packages:
+        </p>
+        <div className="text-center py-10">
+          <p className="text-gray-600">Loading pricing...</p>
+        </div>
       </section>
     );
   }
 
   if (error) {
     return (
-      <section className="text-center py-20">
-        <p className="text-red-600 font-semibold">{error}</p>
+      <section id="pricing" className="max-w-7xl mt-7 bg-white mx-auto px-5 py-20">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-[#0A1C38] mb-4">
+          Affordable & Transparent Pricing
+        </h2>
+        <p className="text-center mb-10 text-red-600 font-semibold">{error}</p>
       </section>
     );
   }
@@ -75,46 +119,46 @@ const PricingSection: React.FC = () => {
       </p>
 
       {/* Per-Visit / One-Time Consultation */}
-      <div className="mb-16">
-        <h3 className="text-2xl font-semibold text-[#0A1C38] text-center mb-10 relative pb-2 after:content-[''] after:w-16 after:h-[3px] after:bg-[#00BCD4] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0">
+      <div className="mb-16 flex flex-col items-center justify-center">
+        <h3 className="text-xl sm:text-2xl font-semibold text-[#0A1C38] text-center mb-8 sm:mb-10 relative pb-2 after:content-[''] after:w-16 after:h-[3px] after:bg-[#00BCD4] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0">
           Per-Visit / One-Time Consultation
         </h3>
 
-        <div className="flex flex-row flex-wrap justify-normal gap-8">
+        <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-6 sm:gap-8 w-full">
           {perVisitPlans.map((plan, idx) => (
             <PricingCard
               key={idx}
+              planId={plan.id}
               title={plan.title}
               price={plan.price}
               period={plan.period}
               features={plan.features}
               actionLabel={plan.actionLabel}
-              onAction={() => alert(`Selected: ${plan.title}`)}
             />
           ))}
         </div>
-        <p className="text-center mt-8 italic text-gray-600">
+        <p className="text-center mt-6 sm:mt-8 italic text-sm sm:text-base text-gray-600 px-4">
           Add-ons: Distance Surcharge (₦2,500 - ₦5,000) | After-Hours/Weekend
           Fee (+20% of visit fee).
         </p>
       </div>
 
       {/* Subscription Plans */}
-      <div>
-        <h3 className="text-2xl font-semibold text-[#0A1C38] text-center mb-10 relative pb-2 after:content-[''] after:w-16 after:h-[3px] after:bg-[#00BCD4] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0">
+      <div className="flex flex-col items-center justify-center">
+        <h3 className="text-xl sm:text-2xl font-semibold text-[#0A1C38] text-center mb-8 sm:mb-10 relative pb-2 after:content-[''] after:w-16 after:h-[3px] after:bg-[#00BCD4] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0">
           Subscription Plans (Monthly)
         </h3>
 
-        <div className="flex flex-row flex-wrap justify-normal gap-8">
+        <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-6 sm:gap-8 w-full">
           {subscriptionPlans.map((plan, idx) => (
             <PricingCard
               key={idx}
+              planId={plan.id}
               title={plan.title}
               price={plan.price}
               period={plan.period}
               features={plan.features}
               actionLabel={plan.actionLabel}
-              onAction={() => alert(`Selected: ${plan.title}`)}
             />
           ))}
         </div>

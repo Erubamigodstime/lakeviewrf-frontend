@@ -15,7 +15,7 @@ const Team = () => {
                 <div className="m-4 p-6 max-w-sm w-[220px] md:w-[270px] bg-[#f3f3f3]   rounded-[10px] shadow-[0_6px_20px_rgba(0,0,0,0.15)] transition-transform duration-300 ease-in-out hover:translate-y-[-10px]">
                   <div className="w-32 h-32 relative border-4 border-[#246E71] rounded-full mx-auto">
                     <Image
-                        src="/team-member1.jpg"
+                        src="/Dr-fola.jpg"
                         alt="Team Member 1"
                         fill
                         className="rounded-full object-cover"
@@ -28,7 +28,7 @@ const Team = () => {
                 <div className="m-4 p-6 max-w-sm w-[220px] md:w-[270px] bg-[#f3f3f3]   rounded-[10px] shadow-[0_6px_20px_rgba(0,0,0,0.15)] transition-transform duration-300 ease-in-out hover:translate-y-[-10px]">
                     <div className="w-32 h-32 relative border-4 border-[#246E71] rounded-full mx-auto">
                     <Image
-                        src="/team-member2.jpg"
+                        src="/nurse.jpg"
                         alt="Team Member 1"
                         fill
                         className="rounded-full object-cover"

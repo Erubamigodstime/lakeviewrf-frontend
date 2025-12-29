@@ -1,67 +1,3 @@
-// import { NextResponse } from "next/server";
-
-// export async function GET() {
-//   return NextResponse.json({
-//     plans: [
-//       {
-//         category: "perVisit",
-//         title: "One-Time Telehealth Consultation",
-//         price: "₦5,000",
-//         period: "consultation",
-//         features: [
-//           "Up to 20 mins virtual assessment",
-//           "Basic health advice (non-emergency)",
-//           "24-hour chat follow-up",
-//           "Saves transport cost & time",
-//         ],
-//         actionLabel: "Book Now",
-//       },
-//       {
-//         category: "perVisit",
-//         title: "Home-Based Care - Category A",
-//         price: "₦20,000",
-//         period: "visit",
-//         features: [
-//           "Vital signs check",
-//           "Simple catheter care",
-//           "Wound dressing (clean wound)",
-//           "Basic medication admin.",
-//           "Basic patient assessment & advice",
-//         ],
-//         actionLabel: "Request Service",
-//       },
-//       {
-//         category: "subscription",
-//         title: "Individual Basic Plan",
-//         price: "₦50,000",
-//         period: "month",
-//         features: [
-//           "Unlimited telehealth",
-//           "Priority booking",
-//           "1 Free home visit (Cat A)",
-//           "10% discount on visits",
-//         ],
-//         actionLabel: "Choose Plan",
-//       },
-//       {
-//         category: "subscription",
-//         title: "Family Premium Plan",
-//         price: "₦400,000",
-//         period: "month",
-//         features: [
-//           "Unlimited telehealth (6 members)",
-//           "7 FREE Home Visits/Month",
-//           "Annual virtual health assessment",
-//           "20% discount on visits",
-//           "Dedicated care coordinator",
-//           "Quarterly family health workshop",
-//         ],
-//         actionLabel: "Choose Plan",
-//       },
-//     ],
-//   });
-// }
-
 
 // app/api/pricing/route.ts
 import { NextResponse } from "next/server";
@@ -73,9 +9,11 @@ export async function GET() {
       // Per-Visit / One-Time Consultation
       // ====================
       {
+        id: "telehealth-consultation",
         category: "perVisit",
         title: "One-Time Telehealth Consultation",
         price: "₦5,000",
+        priceValue: 5000,
         period: "consultation",
         features: [
           "Up to 20 mins virtual assessment",
@@ -86,9 +24,11 @@ export async function GET() {
         actionLabel: "Book Now",
       },
       {
+        id: "home-care-cat-a",
         category: "perVisit",
         title: "Home-Based Care - Category A",
         price: "₦20,000",
+        priceValue: 20000,
         period: "visit",
         features: [
           "Vital signs check",
@@ -100,9 +40,11 @@ export async function GET() {
         actionLabel: "Request Service",
       },
       {
+        id: "home-care-cat-b",
         category: "perVisit",
         title: "Home-Based Care - Category B",
         price: "₦35,000",
+        priceValue: 35000,
         period: "visit",
         features: [
           "Complex wound dressing",
@@ -114,9 +56,11 @@ export async function GET() {
         actionLabel: "Request Service",
       },
       {
+        id: "home-care-cat-c",
         category: "perVisit",
         title: "Home-Based Care - Category C",
         price: "₦55,000",
+        priceValue: 55000,
         period: "visit",
         features: [
           "Intensive post-op care",
@@ -133,9 +77,11 @@ export async function GET() {
       // Subscription Plans (Monthly)
       // ====================
       {
+        id: "individual-basic",
         category: "subscription",
         title: "Individual Basic Plan",
         price: "₦50,000",
+        priceValue: 50000,
         period: "month",
         features: [
           "Unlimited telehealth Consultation",
@@ -146,9 +92,11 @@ export async function GET() {
         actionLabel: "Choose Plan",
       },
       {
+        id: "individual-premium",
         category: "subscription",
         title: "Individual Premium Plan",
         price: "₦120,000",
+        priceValue: 120000,
         period: "month",
         features: [
           "Unlimited telehealth Consultation",
@@ -161,9 +109,11 @@ export async function GET() {
         actionLabel: "Choose Plan",
       },
       {
+        id: "student-plan",
         category: "subscription",
         title: "Student Plan",
         price: "₦20,000",
+        priceValue: 20000,
         period: "month",
         features: [
           "Unlimited nurse-led telehealth",
@@ -174,9 +124,11 @@ export async function GET() {
         actionLabel: "Choose Plan",
       },
       {
+        id: "couple-premium",
         category: "subscription",
         title: "Couple Premium Plan",
         price: "₦200,000",
+        priceValue: 200000,
         period: "month",
         features: [
           "Unlimited telehealth for 2 persons",
@@ -188,9 +140,11 @@ export async function GET() {
         actionLabel: "Choose Plan",
       },
       {
+        id: "family-premium",
         category: "subscription",
         title: "Family Premium Plan (up to 6 persons)",
         price: "₦400,000",
+        priceValue: 400000,
         period: "month",
         features: [
           "Unlimited telehealth for 6 named members",

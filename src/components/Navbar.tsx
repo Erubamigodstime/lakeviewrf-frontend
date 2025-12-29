@@ -9,36 +9,30 @@ export default function Navbar() {
   return (
     <nav className="fixed w-full bg-white shadow-md z-50">
       <div className="container mx-auto flex justify-between items-center p-5">      
-        <div className="flex items-center">
+        <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
           {/* logo */}
           <Image
             src="/lakeviewlogo.jpg"
             alt="Lakeview Health Logo"
-            width={120}
-            height={120}
+            width={140}
+            height={140}
             className="mr-2"
             priority
           />
-         <div className="ml-2 flex flex-col">
-          <Link href="/" className="text-xl font-bold text-[#0A1C38]">
-            Lakeview Health
-          </Link>
-          <p className="text-sm text-gray-600">HEALTH SERVICES LIMITED</p>
-         </div>
-
-        </div>
+        </Link>
         
         {/* Mobile menu button */}
         <button
-          className="md:hidden p-2 border rounded"
+          className="md:hidden p-2 border rounded text-2xl text-[#0A1C38] hover:bg-gray-100 relative z-50"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
         >
           {isOpen ? "✕" : "☰"}
         </button>
 
         {/* Nav Links */}
         <ul
-          className={`md:flex md:space-x-6 absolute md:static bg-white font-semibold left-0 w-full md:w-auto top-16 md:top-auto transition-all duration-300 ${
+          className={`md:flex md:space-x-6 absolute md:static bg-white font-semibold left-0 w-full md:w-auto top-26 md:top-auto transition-all duration-300 z-40 ${
             isOpen ? "block" : "hidden"
           }`}
         >

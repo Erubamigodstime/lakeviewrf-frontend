@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 interface FormData {
   fullName: string;
@@ -10,14 +11,37 @@ interface FormData {
   preferredDateTime: string;
 }
 
-export default function BookingForm() {
+interface PlanDetails {
+  id: string;
+  title: string;
+  price: string;
+  priceValue: number;
+  period: string;
+  category: string;
+  features: string[];
+}
+
+interface BookingFormProps {
+  planId?: string;
+  planDetails?: PlanDetails;
+}
+
+export default function BookingForm({ planId, planDetails }: BookingFormProps) {
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     contactNumber: "",
     email: "",
-    serviceRequired: "",
+    serviceRequired: planDetails?.title || "",
     preferredDateTime: "",
   });
+
+  // Update serviceRequired when planDetails changes
+  useEffect(() => {
+    if (planDetails?.title) {
+      setFormData((prev) => ({ ...prev, serviceRequired: planDetails.title }));
+    }
+  }, [planDetails]);
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [successMessage, setSuccessMessage] = useState<string>("");
@@ -33,8 +57,8 @@ export default function BookingForm() {
       case "contactNumber":
         if (!value.trim()) {
           error = "Contact Number is required.";
-        } else if (!/^\d{10,15}$/.test(value)) {
-          error = "Enter a valid phone number (10–15 digits).";
+        } else if (!/^[\d\s\+\-\(\)]{10,15}$/.test(value)) {
+          error = "Enter a valid phone number (10–15 characters, can include +, -, (), spaces).";
         }
         break;
       case "email":
@@ -63,6 +87,16 @@ export default function BookingForm() {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+      // Clear error when user starts typing
+    if (errors[name as keyof FormData]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+  };
+
+  const handleBlur = (
+    e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
     validateField(name as keyof FormData, value);
   };
 
@@ -76,34 +110,106 @@ export default function BookingForm() {
       if (error) newErrors[key] = error;
     });
 
-    if (Object.keys(newErrors).length > 0) return;
+    // Prevent submission if there are validation errors
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      setSuccessMessage("Please fix all validation errors before submitting.");
+      // Scroll to first error
+      const firstErrorField = Object.keys(newErrors)[0];
+      document.getElementById(`booking${firstErrorField.charAt(0).toUpperCase() + firstErrorField.slice(1)}`)?.focus();
+      return;
+    }
 
     setLoading(true);
     setSuccessMessage("");
 
     try {
+      // Create booking with pricingPlanSlug
+      const bookingPayload: any = { 
+        ...formData,
+        // Convert datetime-local to ISO8601 format
+        preferredDateTime: new Date(formData.preferredDateTime).toISOString(),
+      };
+      
+      // Add pricingPlanSlug if planId is available (from URL)
+      if (planId) {
+        bookingPayload.pricingPlanSlug = planId;
+      }
+
+      console.log("Sending booking payload:", bookingPayload);
+
       const response = await fetch("http://localhost:5000/api/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(bookingPayload),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to submit appointment request.");
+        const errorData = await response.json();
+        console.error("Backend validation errors:", errorData);
+        console.error("Payload sent:", bookingPayload);
+        const errorMsg = errorData.errors 
+          ? errorData.errors.map((e: any) => `${e.field}: ${e.message}`).join('\n')
+          : errorData.message || "Failed to submit appointment request.";
+        throw new Error(errorMsg);
       }
 
-      setSuccessMessage("Appointment request submitted successfully!");
-      setFormData({
-        fullName: "",
-        contactNumber: "",
-        email: "",
-        serviceRequired: "",
-        preferredDateTime: "",
-      });
-      setErrors({});
+      const bookingData = await response.json();
+      
+      // If plan has a price, initiate payment
+      if (planDetails && bookingData.success && bookingData.data.id) {
+        const bookingId = bookingData.data.id;
+        
+        // Initialize payment (backend validates amount)
+        const paymentPayload = {
+          email: formData.email,
+          amount: planDetails.priceValue, // Sent for reference, backend validates
+          bookingId: bookingId,
+          // callbackUrl is optional, backend will use default from env
+        };
+
+        console.log("Payment payload:", paymentPayload);
+
+        const paymentResponse = await fetch("http://localhost:5000/api/payments/initialize", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(paymentPayload),
+        });
+
+        if (!paymentResponse.ok) {
+          const errorData = await paymentResponse.json();
+          console.error("Payment validation errors:", errorData);
+          const errorMsg = errorData.errors 
+            ? errorData.errors.map((e: any) => `${e.field}: ${e.message}`).join('\n')
+            : errorData.message || "Failed to initialize payment";
+          throw new Error(errorMsg);
+        }
+
+        const paymentData = await paymentResponse.json();
+        
+        if (paymentData.success && paymentData.data.authorization_url) {
+          // Redirect to Paystack payment page
+          window.location.href = paymentData.data.authorization_url;
+        } else {
+          throw new Error("Invalid payment response");
+        }
+      } else {
+        // No payment required, show success message
+        setSuccessMessage("Booking request submitted successfully! We will contact you shortly.");
+        setFormData({
+          fullName: "",
+          contactNumber: "",
+          email: "",
+          serviceRequired: "",
+          preferredDateTime: "",
+        });
+        setErrors({});
+      }
     } catch (error) {
       console.error(error);
-      setSuccessMessage("Something went wrong. Please try again later.");
+      setSuccessMessage(
+        error instanceof Error ? error.message : "Something went wrong. Please try again later."
+      );
     } finally {
       setLoading(false);
     }
@@ -145,8 +251,8 @@ export default function BookingForm() {
             id="fullName"
             name="fullName"
             value={formData.fullName}
-            onChange={handleChange}
-            className={`w-full px-4 py-3 border bg-white rounded-md text-base text-gray-800 focus:outline-none focus:ring-2 ${
+            onChange={handleChange}            onBlur={handleBlur}
+            required            className={`w-full px-4 py-3 border bg-white rounded-md text-base text-gray-800 focus:outline-none focus:ring-2 ${
               errors.fullName
                 ? "border-red-500 focus:ring-red-300"
                 : "border-gray-300 focus:ring-cyan-300"
@@ -170,8 +276,9 @@ export default function BookingForm() {
             id="contactNumber"
             name="contactNumber"
             value={formData.contactNumber}
-            onChange={handleChange}
-            className={`w-full px-4 py-3 border bg-white  rounded-md text-base text-gray-800 focus:outline-none focus:ring-2 ${
+            onChange={handleChange}            onBlur={handleBlur}
+            required
+            placeholder="+234 123 456 7890"            className={`w-full px-4 py-3 border bg-white  rounded-md text-base text-gray-800 focus:outline-none focus:ring-2 ${
               errors.contactNumber
                 ? "border-red-500 focus:ring-red-300"
                 : "border-gray-300 focus:ring-cyan-300"
@@ -198,6 +305,8 @@ export default function BookingForm() {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            onBlur={handleBlur}
+            required
             className={`w-full px-4 py-3 border bg-white  rounded-md text-base text-gray-800 focus:outline-none focus:ring-2 ${
               errors.email
                 ? "border-red-500 focus:ring-red-300"
@@ -217,31 +326,20 @@ export default function BookingForm() {
           >
             Service Required
           </label>
-          <select
+          <input
             id="serviceRequired"
             name="serviceRequired"
             value={formData.serviceRequired}
             onChange={handleChange}
+            onBlur={handleBlur}
+            required
+            readOnly={!!planDetails}
             className={`w-full px-4 py-3 border bg-white  rounded-md text-base text-gray-800 focus:outline-none focus:ring-2 ${
               errors.serviceRequired
                 ? "border-red-500 focus:ring-red-300"
                 : "border-gray-300 focus:ring-cyan-300"
             }`}
-          >
-            <option value="">Select a Service</option>
-            <option value="telehealth">
-              One-Time Telehealth Consultation - ₦5,000
-            </option>
-            <option value="homeCareA">
-              Home-Based Care - Category A - ₦20,000
-            </option>
-            <option value="homeCareB">
-              Home-Based Care - Category B - ₦35,000
-            </option>
-            <option value="homeCareC">
-              Home-Based Care - Category C - ₦55,000
-            </option>
-          </select>
+          />
           {errors.serviceRequired && (
             <p className="text-red-500 text-sm mt-1">
               {errors.serviceRequired}
@@ -263,6 +361,9 @@ export default function BookingForm() {
             name="preferredDateTime"
             value={formData.preferredDateTime}
             onChange={handleChange}
+            onBlur={handleBlur}
+            required
+            min={new Date().toISOString().slice(0, 16)}
             className={`w-full px-4 py-3 border bg-white  rounded-md text-base text-gray-800 focus:outline-none focus:ring-2 ${
               errors.preferredDateTime
                 ? "border-red-500 focus:ring-red-300"
