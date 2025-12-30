@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { API_ENDPOINTS } from "@/lib/config";
 import {
   Search,
@@ -39,9 +39,30 @@ export default function AdminBookings() {
     fetchBookings();
   }, []);
 
+  const filterBookings = useCallback(() => {
+    let filtered = [...bookings];
+
+    // Search filter
+    if (searchTerm) {
+      filtered = filtered.filter(
+        (booking) =>
+          booking.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          booking.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          booking.phone.includes(searchTerm)
+      );
+    }
+
+    // Status filter
+    if (statusFilter !== "ALL") {
+      filtered = filtered.filter((booking) => booking.status === statusFilter);
+    }
+
+    setFilteredBookings(filtered);
+  }, [bookings, searchTerm, statusFilter]);
+
   useEffect(() => {
     filterBookings();
-  }, [bookings, searchTerm, statusFilter]);
+  }, [filterBookings]);
 
   const fetchBookings = async () => {
     try {
@@ -62,27 +83,6 @@ export default function AdminBookings() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const filterBookings = () => {
-    let filtered = [...bookings];
-
-    // Search filter
-    if (searchTerm) {
-      filtered = filtered.filter(
-        (booking) =>
-          booking.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          booking.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          booking.phone.includes(searchTerm)
-      );
-    }
-
-    // Status filter
-    if (statusFilter !== "ALL") {
-      filtered = filtered.filter((booking) => booking.status === statusFilter);
-    }
-
-    setFilteredBookings(filtered);
   };
 
   const updateBookingStatus = async (bookingId: number, newStatus: string) => {

@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { API_ENDPOINTS } from "@/lib/config";
 import { Plus, Edit, Trash2, Save, X } from "lucide-react";
 
 type ContentType = "services" | "pricing" | "faqs" | "testimonials";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface ContentItem {
   id: number;
   [key: string]: any;
@@ -18,11 +19,7 @@ export default function AdminContent() {
   const [editingItem, setEditingItem] = useState<ContentItem | null>(null);
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    fetchContent();
-  }, [contentType]);
-
-  const fetchContent = async () => {
+  const fetchContent = useCallback(async () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("adminToken");
@@ -39,7 +36,11 @@ export default function AdminContent() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [contentType]);
+
+  useEffect(() => {
+    fetchContent();
+  }, [fetchContent]);
 
   const handleCreate = () => {
     const newItem: any = { id: 0 };
