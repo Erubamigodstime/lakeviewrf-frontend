@@ -3,18 +3,6 @@
 import React, { useEffect, useState } from "react";
 import PricingCard from "./PricingCard";
 
-interface PricingPlan {
-  id: string;
-  name: string;
-  price: number;
-  currency: string;
-  duration: string;
-  category: string;
-  features: string[];
-  isPopular?: boolean;
-  isActive?: boolean;
-}
-
 interface TransformedPlan {
   id: string;
   title: string;

@@ -1,11 +1,18 @@
 // Centralized auth utilities for enterprise-grade authentication
 import { API_ENDPOINTS } from './config';
 
+interface User {
+  id: string;
+  email: string;
+  role: string;
+  name?: string;
+}
+
 interface LoginResponse {
   success: boolean;
   data?: {
     token: string;
-    user: any;
+    user: User;
   };
   message?: string;
 }
@@ -42,7 +49,7 @@ export async function login(email: string, password: string): Promise<LoginRespo
     }
 
     return { success: true, data: data.data };
-  } catch (error) {
+  } catch {
     return { success: false, message: 'Network error. Please try again.' };
   }
 }
@@ -81,7 +88,7 @@ export function getToken(): string | null {
 /**
  * Get current user data
  */
-export function getUser(): any | null {
+export function getUser(): User | null {
   const userData = localStorage.getItem('adminUser');
   if (!userData) return null;
   
