@@ -1,4 +1,5 @@
 // Centralized auth utilities for enterprise-grade authentication
+import { API_ENDPOINTS } from './config';
 
 interface LoginResponse {
   success: boolean;
@@ -14,7 +15,7 @@ interface LoginResponse {
  */
 export async function login(email: string, password: string): Promise<LoginResponse> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/login`, {
+    const res = await fetch(API_ENDPOINTS.login, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include', // Important for cookies
@@ -106,7 +107,7 @@ export async function verifyToken(): Promise<boolean> {
   if (!token) return false;
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/verify`, {
+    const res = await fetch(API_ENDPOINTS.verify, {
       headers: { Authorization: `Bearer ${token}` },
       credentials: 'include',
     });

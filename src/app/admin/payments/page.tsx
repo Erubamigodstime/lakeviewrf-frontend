@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { API_ENDPOINTS } from "@/lib/config";
 import {
   Search,
   Filter,
@@ -50,7 +51,7 @@ export default function AdminPayments() {
       const token = localStorage.getItem("adminToken");
       if (!token) return;
 
-      const res = await fetch("http://localhost:5000/api/admin/payments", {
+      const res = await fetch(API_ENDPOINTS.adminPayments, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -95,7 +96,7 @@ export default function AdminPayments() {
       if (!token) return;
 
       const res = await fetch(
-        `http://localhost:5000/api/payments/${paymentId}/receipt`,
+        API_ENDPOINTS.paymentsReceipt(paymentId),
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -126,7 +127,7 @@ export default function AdminPayments() {
       if (!token) return;
 
       const res = await fetch(
-        `http://localhost:5000/api/payments/${paymentId}/refund`,
+        API_ENDPOINTS.paymentsRefund(paymentId),
         {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },

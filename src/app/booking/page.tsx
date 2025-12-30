@@ -1,8 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
-import Navbar from "@/components/Navbar";
+import { Suspense, useEffect, useState } from "react";import { API_ENDPOINTS } from "@/lib/config";import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookingForm from "@/components/BookingForm";
 
@@ -32,7 +31,7 @@ function BookingContent() {
       }
 
       try {
-        const res = await fetch(`http://localhost:5000/api/pricing/slug/${planId}`);
+        const res = await fetch(API_ENDPOINTS.pricingBySlug(planId));
         if (!res.ok) {
           throw new Error("Plan not found");
         }

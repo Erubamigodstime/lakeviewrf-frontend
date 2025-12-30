@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { API_ENDPOINTS } from "@/lib/config";
 
 interface FormData {
   name: string;
@@ -54,7 +55,7 @@ const ContactSection: React.FC = () => {
     setStatus(null);
 
     try {
-      const res = await fetch("http://localhost:5000/api/contact", {
+      const res = await fetch(API_ENDPOINTS.contact, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

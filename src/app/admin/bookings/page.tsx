@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { API_ENDPOINTS } from "@/lib/config";
 import {
   Search,
   Filter,
@@ -47,7 +48,7 @@ export default function AdminBookings() {
       const token = localStorage.getItem("adminToken");
       if (!token) return;
 
-      const res = await fetch("http://localhost:5000/api/admin/bookings", {
+      const res = await fetch(API_ENDPOINTS.adminBookings, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -90,7 +91,7 @@ export default function AdminBookings() {
       if (!token) return;
 
       const res = await fetch(
-        `http://localhost:5000/api/admin/bookings/${bookingId}/status`,
+        API_ENDPOINTS.adminBookingStatus(bookingId),
         {
           method: "PATCH",
           headers: {

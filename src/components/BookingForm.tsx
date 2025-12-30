@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { API_ENDPOINTS } from "@/lib/config";
 
 interface FormData {
   fullName: string;
@@ -138,7 +139,7 @@ export default function BookingForm({ planId, planDetails }: BookingFormProps) {
 
       console.log("Sending booking payload:", bookingPayload);
 
-      const response = await fetch("http://localhost:5000/api/bookings", {
+      const response = await fetch(API_ENDPOINTS.bookings, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bookingPayload),
@@ -170,7 +171,7 @@ export default function BookingForm({ planId, planDetails }: BookingFormProps) {
 
         console.log("Payment payload:", paymentPayload);
 
-        const paymentResponse = await fetch("http://localhost:5000/api/payments/initialize", {
+        const paymentResponse = await fetch(API_ENDPOINTS.paymentsInitialize, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(paymentPayload),

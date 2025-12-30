@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { API_ENDPOINTS } from "@/lib/config";
 import {
   Calendar,
   DollarSign,
@@ -43,7 +44,7 @@ export default function AdminDashboard() {
       if (!token) return;
 
       // Fetch dashboard stats
-      const statsRes = await fetch("http://localhost:5000/api/admin/dashboard", {
+      const statsRes = await fetch(API_ENDPOINTS.adminDashboard, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -71,7 +72,7 @@ export default function AdminDashboard() {
 
       // Fetch recent bookings
       const bookingsRes = await fetch(
-        "http://localhost:5000/api/admin/bookings?limit=5&sort=createdAt:desc",
+        `${API_ENDPOINTS.adminBookings}?limit=5&sort=createdAt:desc`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 

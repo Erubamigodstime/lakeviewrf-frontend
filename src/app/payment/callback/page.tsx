@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { API_ENDPOINTS } from "@/lib/config";
 import Link from "next/link";
 
 export default function PaymentCallback() {
@@ -26,7 +27,7 @@ export default function PaymentCallback() {
 
       try {
         const res = await fetch(
-          `http://localhost:5000/api/payments/verify/${reference}`
+          API_ENDPOINTS.paymentsVerify(reference)
         );
         const data = await res.json();
 

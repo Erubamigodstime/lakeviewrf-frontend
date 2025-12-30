@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { API_ENDPOINTS } from "@/lib/config";
 import { Plus, Edit, Trash2, Save, X } from "lucide-react";
 
 type ContentType = "services" | "pricing" | "faqs" | "testimonials";
@@ -27,7 +28,7 @@ export default function AdminContent() {
       const token = localStorage.getItem("adminToken");
       if (!token) return;
 
-      const res = await fetch(`http://localhost:5000/api/${contentType}`, {
+      const res = await fetch(API_ENDPOINTS.adminContent(contentType), {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -80,8 +81,8 @@ export default function AdminContent() {
 
       const url =
         editingItem?.id === 0
-          ? `http://localhost:5000/api/${contentType}`
-          : `http://localhost:5000/api/${contentType}/${editingItem?.id}`;
+          ? API_ENDPOINTS.adminContent(contentType)
+          : API_ENDPOINTS.adminContentById(contentType, editingItem?.id.toString());
 
       const method = editingItem?.id === 0 ? "POST" : "PUT";
 
@@ -113,7 +114,7 @@ export default function AdminContent() {
       if (!token) return;
 
       const res = await fetch(
-        `http://localhost:5000/api/${contentType}/${id}`,
+        API_ENDPOINTS.adminContentById(contentType, id.toString()),
         {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
